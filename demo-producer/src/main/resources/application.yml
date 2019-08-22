@@ -1,0 +1,15 @@
+server.port: 1000
+spring:
+  cloud:
+    stream:
+      kafka:
+        binder:
+          brokers: localhost
+          defaultBrokerPort: 9092
+          minPartitionCount: 3
+          autoCreateTopics: true
+          autoAddPartitions: true
+      bindings:
+        fruitStorageImportChannel:
+          destination: fruitStorageTopic
+          contentType: application/json

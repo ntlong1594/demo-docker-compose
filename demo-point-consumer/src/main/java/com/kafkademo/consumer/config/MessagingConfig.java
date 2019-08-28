@@ -1,6 +1,6 @@
-package com.kafkademo.producer.config;
+package com.kafkademo.consumer.config;
 
-import com.kafkademo.producer.channel.OrderStorageChannel;
+import com.kafkademo.consumer.channel.OrderStorageChannel;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 
 /**

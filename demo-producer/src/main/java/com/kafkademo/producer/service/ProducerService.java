@@ -1,7 +1,7 @@
 package com.kafkademo.producer.service;
 
-import com.kafkademo.producer.channel.FruitStorageChannel;
-import com.kafkademo.producer.dto.Fruit;
+import com.kafkademo.producer.channel.OrderStorageChannel;
+import com.kafkademo.producer.dto.Order;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.integration.support.MessageBuilder;
@@ -15,31 +15,31 @@ import org.springframework.util.MimeTypeUtils;
 @Slf4j
 public class ProducerService {
     @Autowired
-    private FruitStorageChannel fruitStorageChannel;
+    private OrderStorageChannel orderStorageChannel;
 
-    public boolean produceToKafka(Fruit fruit) {
-        log.info(" ======= Start importing fruit into Fruit Storage =======");
-        MessageChannel channel = fruitStorageChannel.fruitStorageImportChannel();
-        Message<Fruit> fruitMessage = MessageBuilder.withPayload(fruit)
+    public boolean produceToKafka(Order order) {
+        log.info(" ======= Start collecting your order and put it into Order Storage =======");
+        MessageChannel channel = orderStorageChannel.orderStorageImportChannel();
+        Message<Order> fruitMessage = MessageBuilder.withPayload(order)
                 .setHeader(MessageHeaders.CONTENT_TYPE, MimeTypeUtils.APPLICATION_JSON).build();
         if (channel.send(fruitMessage, 1)) {
-            log.info(" ======= Importing fruit into Fruit Storage SUCCESS =======");
+            log.info(" ======= Success collect your order =======");
             return true;
         }
-        log.error("======= Importing fruit FAIL =======");
+        log.error("======= Fail to collect your order  =======");
         return false;
     }
 
-    public boolean produceToKafka(Integer partition, Fruit fruit) {
+    public boolean produceToKafka(Integer partition, Order order) {
         log.info(" ======= Start importing fruit into Fruit Storage to partition {} =======", partition);
-        MessageChannel channel = fruitStorageChannel.fruitStorageImportChannel();
-        Message<Fruit> fruitMessage = MessageBuilder.withPayload(fruit)
+        MessageChannel channel = orderStorageChannel.orderStorageImportChannel();
+        Message<Order> fruitMessage = MessageBuilder.withPayload(order)
                 .setHeader(MessageHeaders.CONTENT_TYPE, MimeTypeUtils.APPLICATION_JSON).build();
         if (channel.send(fruitMessage, partition == null ? 0 : partition)) {
-            log.info(" ======= Importing fruit into Fruit Storage SUCCESS to partition {} =======", partition);
+            log.info(" ======= Success collect your order to partition {} =======", partition);
             return true;
         }
-        log.error("======= Importing fruit FAIL to partition {} =======", partition);
+        log.error("======= FAIL collect your order to partition {} =======", partition);
         return false;
     }
 }

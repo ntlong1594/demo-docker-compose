@@ -23,21 +23,27 @@ services:
     environment:
       - SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS=kafka
     restart: always
-  
-  demo-truck-consumer:
-    image: ntlong1594/kafka-demo-truck-consumer
-    environment:
-      - SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS=kafka
-    ports:
-      - 2000:2000
-    restart: always
 
-  demo-plane-consumer:
-    image: ntlong1594/kafka-demo-plane-consumer
+  demo-truck1-consumer:
+    image: ntlong1594/kafka-demo-truck1-consumer
     environment:
       - SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS=kafka
     ports:
       - 3000:3000
     restart: always
+
+  demo-truck2-consumer:
+    image: ntlong1594/kafka-demo-truck2-consumer
+    environment:
+      - SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS=kafka
+    ports:
+      - 2000:2000
+    restart: always
   
-  
+  demo-point-consumer:
+    image: ntlong1594/kafka-demo-point-consumer
+    environment:
+      - SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS=kafka
+    ports:
+      - 4000:4000
+    restart: always

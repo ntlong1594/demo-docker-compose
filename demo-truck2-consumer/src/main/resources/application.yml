@@ -1,4 +1,4 @@
-server.port: 1000
+server.port: 2000
 spring:
   cloud:
     stream:
@@ -10,6 +10,8 @@ spring:
           autoCreateTopics: true
           autoAddPartitions: true
       bindings:
-        orderStorageImportChannel:
+        orderStorageDeliveryChannel:
           destination: orderStorageTopic
           contentType: application/json
+          group: orderStorageConsumer
+

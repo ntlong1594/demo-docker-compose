@@ -1,5 +1,6 @@
 version: '2'
-  demo-viettelpost-consumer:
+services:
+  viettelpost:
     image: ntlong1594/kafka-demo-viettelpost-consumer
     environment:
       - SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS=kafka

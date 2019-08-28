@@ -16,7 +16,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock    
 
-  demo-producer:
+  producer:
     image: ntlong1594/kafka-demo-producer
     ports:
       - 1000:1000

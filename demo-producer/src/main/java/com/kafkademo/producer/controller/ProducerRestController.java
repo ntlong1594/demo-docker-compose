@@ -23,12 +23,12 @@ public class ProducerRestController {
         return new ResponseEntity<>("Unable to produce fruit to kafka", HttpStatus.BAD_REQUEST);
     }
 
-    @PostMapping("/producer/order/partition/{partition}")
-    @ApiOperation(value = "Publish fruit into storage with specific partition")
-    public ResponseEntity<Object> collectOrderWithPartition(@PathVariable("partition") Integer partition, @RequestBody Order order) {
-        if (producerService.produceToKafka(partition, order)) {
-            return new ResponseEntity<>(order, HttpStatus.OK);
-        }
-        return new ResponseEntity<>("Unable to produce fruit to kafka", HttpStatus.BAD_REQUEST);
-    }
+//    @PostMapping("/producer/order/partition/{partition}")
+//    @ApiOperation(value = "Publish fruit into storage with specific partition")
+//    public ResponseEntity<Object> collectOrderWithPartition(@PathVariable("partition") Integer partition, @RequestBody Order order) {
+//        if (producerService.produceToKafka(partition, order)) {
+//            return new ResponseEntity<>(order, HttpStatus.OK);
+//        }
+//        return new ResponseEntity<>("Unable to produce fruit to kafka", HttpStatus.BAD_REQUEST);
+//    }
 }

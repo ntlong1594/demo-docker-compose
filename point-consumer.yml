@@ -1,6 +1,6 @@
 version: '2'
 services:
-  demo-point-consumer:
+  point:
     image: ntlong1594/kafka-demo-point-consumer
     environment:
       - SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS=kafka

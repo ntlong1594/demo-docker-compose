@@ -1,4 +1,5 @@
 server.port: 1000
+logging.level.root: WARN
 spring:
   cloud:
     stream:

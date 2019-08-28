@@ -2,14 +2,12 @@ package com.kafkademo.consumer.service;
 
 import com.kafkademo.consumer.channel.OrderStorageChannel;
 import com.kafkademo.consumer.dto.Order;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.messaging.Message;
 import org.springframework.stereotype.Service;
 
 @Service
-@Slf4j
 public class PointConsumerService {
     @Autowired
     private OrderStorageChannel orderStorageChannel;
@@ -17,12 +15,12 @@ public class PointConsumerService {
     @StreamListener(OrderStorageChannel.INPUT)
     public void consumeFruit(Message<Order> message) {
         Order order = message.getPayload();
-        log.info("\n----------------------------------------------------------\n\t" +
+        System.out.println(String.format("\n----------------------------------------------------------\n\t" +
                         "[Earning 1 point for order]: \n\t" +
-                        "- Fruit Type: \t\t{}\n\t" +
-                        "- Quantity: \t{}\n\t" +
-                        "- User: \t{}\n----------------------------------------------------------",
-                order.getFruitType(), order.getQuantity(), order.getUser());
+                        "- Fruit Type: \t%s\n\t" +
+                        "- Quantity: \t%s\n\t" +
+                        "- User: \t%s\n----------------------------------------------------------",
+                order.getFruitType(), order.getQuantity(), order.getUser()));
     }
 
 }

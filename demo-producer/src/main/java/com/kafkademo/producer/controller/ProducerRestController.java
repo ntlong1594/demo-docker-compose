@@ -14,18 +14,18 @@ public class ProducerRestController {
     @Autowired
     private ProducerService producerService;
 
-    @PostMapping("/producer/fruit")
+    @PostMapping("/producer/order")
     @ApiOperation(value = "Publish fruit into storage with random partition")
-    public ResponseEntity<Object> produceFruit(@RequestBody Order order) {
+    public ResponseEntity<Object> collectOrder(@RequestBody Order order) {
         if (producerService.produceToKafka(order)) {
             return new ResponseEntity<>(order, HttpStatus.OK);
         }
         return new ResponseEntity<>("Unable to produce fruit to kafka", HttpStatus.BAD_REQUEST);
     }
 
-    @PostMapping("/producer/fruit/partition/{partition}")
+    @PostMapping("/producer/order/partition/{partition}")
     @ApiOperation(value = "Publish fruit into storage with specific partition")
-    public ResponseEntity<Object> produceFruitWithPartition(@PathVariable("partition") Integer partition, @RequestBody Order order) {
+    public ResponseEntity<Object> collectOrderWithPartition(@PathVariable("partition") Integer partition, @RequestBody Order order) {
         if (producerService.produceToKafka(partition, order)) {
             return new ResponseEntity<>(order, HttpStatus.OK);
         }

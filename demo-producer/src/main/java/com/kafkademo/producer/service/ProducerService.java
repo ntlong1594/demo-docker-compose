@@ -18,12 +18,16 @@ public class ProducerService {
     private OrderStorageChannel orderStorageChannel;
 
     public boolean produceToKafka(Order order) {
-        log.info(" ======= Start collecting your order and put it into Order Storage =======");
         MessageChannel channel = orderStorageChannel.orderStorageImportChannel();
         Message<Order> fruitMessage = MessageBuilder.withPayload(order)
                 .setHeader(MessageHeaders.CONTENT_TYPE, MimeTypeUtils.APPLICATION_JSON).build();
         if (channel.send(fruitMessage, 1)) {
-            log.info(" ======= Success collect your order =======");
+            log.info("\n----------------------------------------------------------\n\t" +
+                            "[Your order has been collected]: \n\t" +
+                            "- Fruit Type: \t\t{}\n\t" +
+                            "- Quantity: \t{}\n\t" +
+                            "- User: \t{}\n----------------------------------------------------------",
+                    order.getFruitType(), order.getQuantity(), order.getUser());
             return true;
         }
         log.error("======= Fail to collect your order  =======");
@@ -36,7 +40,12 @@ public class ProducerService {
         Message<Order> fruitMessage = MessageBuilder.withPayload(order)
                 .setHeader(MessageHeaders.CONTENT_TYPE, MimeTypeUtils.APPLICATION_JSON).build();
         if (channel.send(fruitMessage, partition == null ? 0 : partition)) {
-            log.info(" ======= Success collect your order to partition {} =======", partition);
+            log.info("\n----------------------------------------------------------\n\t" +
+                            "[Your order has been collected and put into partition {}]: \n\t" +
+                            "- Fruit Type: \t\t{}\n\t" +
+                            "- Quantity: \t{}\n\t" +
+                            "- User: \t{}\n----------------------------------------------------------",
+                    partition, order.getFruitType(), order.getQuantity(), order.getUser());
             return true;
         }
         log.error("======= FAIL collect your order to partition {} =======", partition);

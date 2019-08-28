@@ -1,0 +1,8 @@
+version: '2'
+  demo-viettelpost-consumer:
+    image: ntlong1594/kafka-demo-truck2-consumer
+    environment:
+      - SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS=kafka
+    ports:
+      - 2000:2000
+    restart: always

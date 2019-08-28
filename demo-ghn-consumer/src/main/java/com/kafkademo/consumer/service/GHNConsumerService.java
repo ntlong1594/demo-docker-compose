@@ -10,14 +10,19 @@ import org.springframework.stereotype.Service;
 
 @Service
 @Slf4j
-public class Truck1ConsumerService {
+public class GHNConsumerService {
     @Autowired
     private OrderStorageChannel orderStorageChannel;
 
     @StreamListener(OrderStorageChannel.INPUT)
     public void consumeFruit(Message<Order> message) {
         Order order = message.getPayload();
-        log.info("===== '{}' is shipping to end-user with name: '{}' by TRUCK 1 consumer =====", order.getFruitType(), order.getUser());
+        log.info("\n----------------------------------------------------------\n\t" +
+                        "[Order has been delivered by GHN consumer]: \n\t" +
+                        "- Fruit Type: \t\t{}\n\t" +
+                        "- Quantity: \t{}\n\t" +
+                        "- User: \t{}\n----------------------------------------------------------",
+                order.getFruitType(), order.getQuantity(), order.getUser());
     }
 
 }

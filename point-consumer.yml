@@ -1,0 +1,9 @@
+version: '2'
+services:
+  demo-point-consumer:
+    image: ntlong1594/kafka-demo-point-consumer
+    environment:
+      - SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS=kafka
+    ports:
+      - 4000:4000
+    restart: always

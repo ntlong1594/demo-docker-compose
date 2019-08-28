@@ -1,7 +1,7 @@
 version: '2'
 services:
   demo-ghn-consumer:
-    image: ntlong1594/kafka-demo-truck1-consumer
+    image: ntlong1594/kafka-demo-ghn-consumer
     environment:
       - SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS=kafka
     ports:

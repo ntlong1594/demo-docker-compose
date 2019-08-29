@@ -7,7 +7,7 @@ spring:
         binder:
           brokers: localhost
           defaultBrokerPort: 9092
-          minPartitionCount: 3
+          minPartitionCount: 2
           autoCreateTopics: true
           autoAddPartitions: true
       bindings:

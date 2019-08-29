@@ -20,11 +20,11 @@ public class ProducerService {
         Message<Order> fruitMessage = MessageBuilder.withPayload(order)
                 .setHeader(MessageHeaders.CONTENT_TYPE, MimeTypeUtils.APPLICATION_JSON).build();
         if (channel.send(fruitMessage, 1)) {
-            System.out.println(String.format("\n----------------------------------------------------------\n\t" +
-                            "[Your order has been collected]: \n\t" +
-                            "- Fruit Type: \t%s\n\t" +
-                            "- Quantity: \t%s\n\t" +
-                            "- User: \t%s\n----------------------------------------------------------",
+            System.out.println(String.format("\n--------------------------------\n" +
+                            "[Your order has been collected]: \n" +
+                            "- Fruit Type: \t%s\n" +
+                            "- Quantity: \t%s\n" +
+                            "- User: \t%s\n--------------------------------",
                     order.getFruitType(), order.getQuantity(), order.getUser()));
             return true;
         }
@@ -37,11 +37,11 @@ public class ProducerService {
         Message<Order> fruitMessage = MessageBuilder.withPayload(order)
                 .setHeader(MessageHeaders.CONTENT_TYPE, MimeTypeUtils.APPLICATION_JSON).build();
         if (channel.send(fruitMessage, partition == null ? 0 : partition)) {
-            System.out.println(String.format("\n----------------------------------------------------------\n\t" +
-                            "[Your order has been collected]: \n\t" +
-                            "- Fruit Type: \t%s\n\t" +
-                            "- Quantity: \t%s\n\t" +
-                            "- User: \t%s\n----------------------------------------------------------",
+            System.out.println(String.format("\n--------------------------------\n" +
+                            "[Your order has been collected]: \n" +
+                            "- Fruit Type: \t%s\n" +
+                            "- Quantity: \t%s\n" +
+                            "- User: \t%s\n--------------------------------",
                     order.getFruitType(), order.getQuantity(), order.getUser()));
             return true;
         }

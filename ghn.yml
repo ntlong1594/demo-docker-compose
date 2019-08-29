@@ -1,6 +1,6 @@
 version: '2'
 services:
-  ghn:
+  giao-hang-nhanh:
     image: ntlong1594/kafka-demo-ghn-consumer
     environment:
       - SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS=kafka

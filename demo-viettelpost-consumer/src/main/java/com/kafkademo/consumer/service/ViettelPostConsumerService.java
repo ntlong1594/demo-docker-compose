@@ -15,11 +15,11 @@ public class ViettelPostConsumerService {
     @StreamListener(OrderStorageChannel.INPUT)
     public void consumeFruit(Message<Order> message) {
         Order order = message.getPayload();
-        System.out.println(String.format("\n----------------------------------------------------------\n\t" +
-                        "[ViettelPost is delivering order]: \n\t" +
-                        "- Fruit Type: \t%s\n\t" +
-                        "- Quantity: \t%s\n\t" +
-                        "- User: \t%s\n----------------------------------------------------------",
+        System.out.println(String.format("\n--------------------------------\n" +
+                        "[ViettelPost is delivering order]: \n" +
+                        "- Fruit Type: \t%s\n" +
+                        "- Quantity: \t%s\n" +
+                        "- User: \t%s\n--------------------------------",
                 order.getFruitType(), order.getQuantity(), order.getUser()));
     }
 

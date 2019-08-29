@@ -15,11 +15,3 @@ services:
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock    
-
-  producer:
-    image: ntlong1594/kafka-demo-producer
-    ports:
-      - 1000:1000
-    environment:
-      - SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS=kafka
-    restart: always

@@ -1,0 +1,9 @@
+version: '2'
+services:
+  producer:
+    image: ntlong1594/kafka-demo-producer
+    ports:
+      - 1000:1000
+    environment:
+      - SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS=kafka
+    restart: always

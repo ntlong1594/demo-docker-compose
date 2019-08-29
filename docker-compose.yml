@@ -1,0 +1,49 @@
+version: '2'
+services:
+  zookeeper:
+    image: wurstmeister/zookeeper
+    ports:
+      - 2181:2181
+      
+  kafka:
+    image: wurstmeister/kafka
+    ports:
+      - 9092:9092
+    environment:
+      KAFKA_ADVERTISED_HOST_NAME: kafka
+      KAFKA_ADVERTISED_PORT: 9092
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock    
+
+  producer:
+    image: ntlong1594/kafka-demo-producer
+    ports:
+      - 1000:1000
+    environment:
+      - SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS=kafka
+    restart: always
+    
+  ghn:
+    image: ntlong1594/kafka-demo-ghn-consumer
+    environment:
+      - SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS=kafka
+    ports:
+      - 3000:3000
+    restart: always
+
+  point:
+    image: ntlong1594/kafka-demo-point-consumer
+    environment:
+      - SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS=kafka
+    ports:
+      - 4000:4000
+    restart: always
+    
+  viettelpost:
+    image: ntlong1594/kafka-demo-viettelpost-consumer
+    environment:
+      - SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS=kafka
+    ports:
+      - 2000:2000
+    restart: always
